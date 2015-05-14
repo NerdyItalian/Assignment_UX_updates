@@ -18,12 +18,19 @@ router.post('/', function(req, res, next) {
   });
 });
 
-/* GET /assignments/id */
-router.get('/:id', function(req, res, next) {
-  assignments.findById(req.params.id, function (err, assignment) {
-    if (err) return next(err);
-    res.json(assignment);
-  });
+/* GET /assignments/search/note */
+router.get('/search/:name', function(req, res, next) {
+  assignments.find({name: new RegExp(req.params.name, 'i')}, 'name',
+      {
+          sort: {
+              name: 1
+          }
+      },
+
+      function (err, assignment) {
+        if (err) return next(err);
+        res.json(assignment);
+      });
 });
 
 /* PUT /assignments/:id */
