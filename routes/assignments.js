@@ -28,7 +28,7 @@ router.get('/search', function(req, res, next) {
     var endDate = req.query.endDate;
     console.log("Name: "+req.query.name+" Start date: "+startDate+" End Date:"+endDate+" Direction: "+ req.query.sortOrder);
 
-    if (startDate == undefined || endDate == undefined) {
+    if (startDate == "" || endDate == "") {
         endDate = moment().startOf('day');
         startDate = moment(endDate).add(-1000, 'years');
     }
